@@ -8,7 +8,7 @@ USER_DATA_DIR = "user_excels"
 os.makedirs(USER_DATA_DIR, exist_ok=True)
 
 # 🔑 Получаем токен из переменных окружения
-TOKEN = ("7815480108:AAFQqRppkzWiO4RnZ_aEupBLWKDZcKeANNQ")
+TOKEN = os.environ.get("BOT_TOKEN")
 
 # 📁 Генерация пути к Excel-файлу пользователя
 def get_excel_path(user_id: int) -> str:
