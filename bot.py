@@ -80,14 +80,26 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 # 🚀 Запуск бота
 if __name__ == "__main__":
-    if not TOKEN:
-        raise ValueError("❌ Переменная окружения BOT_TOKEN не установлена.")
+    from dotenv import load_dotenv
+    load_dotenv()
+
+    TOKEN = os.environ.get("BOT_TOKEN")
+    RENDER_HOSTNAME = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
+    PORT = int(os.environ.get("PORT", 8443))
+
+    if not TOKEN or not RENDER_HOSTNAME:
+        raise ValueError("BOT_TOKEN или RENDER_EXTERNAL_HOSTNAME не установлены.")
 
     app = ApplicationBuilder().token(TOKEN).build()
+
     app.add_handler(CommandHandler("start", start))
+    app.add_handler(CommandHandler("export", export_file))
     app.add_handler(MessageHandler(filters.Text(["Добавить данные"]), prompt_for_data))
     app.add_handler(MessageHandler(filters.Text(["📤 Экспортировать файл"]), export_file))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
-    app.add_handler(CommandHandler("export", export_file))
 
-    app.run_polling()
+    app.run_webhook(listen="0.0.0.0",
+        port=PORT,
+        webhook_url=f"https://{RENDER_HOSTNAME}/webhook"
+    )
+
