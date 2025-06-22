@@ -8,9 +8,6 @@ from dotenv import load_dotenv
 USER_DATA_DIR = "user_excels"
 os.makedirs(USER_DATA_DIR, exist_ok=True)
 
-# 🔑 Получаем токен из переменных окружения
-TOKEN = os.environ.get("BOT_TOKEN")
-
 # 📁 Генерация пути к Excel-файлу пользователя
 def get_excel_path(user_id: int) -> str:
      desktop = os.path.join(os.path.expanduser("~"), "Desktop")
