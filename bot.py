@@ -4,6 +4,9 @@ from openpyxl import Workbook, load_workbook
 import os
 from dotenv import load_dotenv
 import asyncio
+import nest_asyncio
+
+nest_asyncio.apply()
 
 # 📁 Папка для хранения Excel-файлов пользователей
 USER_DATA_DIR = "user_excels"
@@ -102,4 +105,4 @@ async def main():
     )
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    asyncio.get_event_loop().run_until_complete(main())
