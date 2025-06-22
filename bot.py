@@ -87,7 +87,7 @@ if __name__ == "__main__":
     if not TOKEN or not RENDER_HOSTNAME:
         raise ValueError("BOT_TOKEN или RENDER_EXTERNAL_HOSTNAME не установлены.")
 
-    app = ApplicationBuilder().token(TOKEN).build()
+    app = ApplicationBuilder().token(TOKEN).build().webhook()
 
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("export", export_file))
