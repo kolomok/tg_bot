@@ -81,7 +81,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text("Нажмите 'Добавить данные', чтобы внести запись.")
 
 # 🚀 Запуск бота
-async def main():
+
     load_dotenv()
 
     TOKEN = os.environ.get("BOT_TOKEN")
@@ -104,5 +104,3 @@ async def main():
         webhook_url=f"https://{RENDER_HOSTNAME}/webhook"
     )
 
-if __name__ == "__main__":
-    asyncio.get_event_loop().run_until_complete(main())
