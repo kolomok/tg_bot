@@ -78,7 +78,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text("Нажмите 'Добавить данные', чтобы внести запись.")
 
 # 🚀 Запуск бота
-async def __main__():
+async def main():
     load_dotenv()
 
     TOKEN = os.environ.get("BOT_TOKEN")
