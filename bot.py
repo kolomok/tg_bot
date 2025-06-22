@@ -103,5 +103,3 @@ if __name__ == "__main__":
         webhook_url=f"https://{RENDER_HOSTNAME}/webhook"
     )
 
-print(f"🌐 Webhook URL: https://{RENDER_HOSTNAME}/webhook")
-print(f"🔑 TOKEN: {TOKEN[:10]}...")  # Только начало токена, для безопасности
