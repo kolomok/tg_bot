@@ -2,6 +2,7 @@ from telegram import Update, ReplyKeyboardMarkup, InputFile
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, ContextTypes, filters
 from openpyxl import Workbook, load_workbook
 import os
+from dotenv import load_dotenv
 
 # 📁 Папка для хранения Excel-файлов пользователей
 USER_DATA_DIR = "user_excels"
@@ -80,7 +81,6 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 # 🚀 Запуск бота
 if __name__ == "__main__":
-    from dotenv import load_dotenv
     load_dotenv()
 
     TOKEN = os.environ.get("BOT_TOKEN")
