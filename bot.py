@@ -94,7 +94,7 @@ if __name__ == "__main__":
     app.add_handler(MessageHandler(filters.Text(["Добавить данные"]), prompt_for_data))
     app.add_handler(MessageHandler(filters.Text(["📤 Экспортировать файл"]), export_file))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
-
+    print(f"🌐 Старт бота: {RENDER_HOSTNAME}, порт {PORT}")
     app.run_webhook(listen="0.0.0.0",
         port=PORT,
         webhook_url=f"https://{RENDER_HOSTNAME}/webhook"
