@@ -3,6 +3,7 @@ from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, Con
 from openpyxl import Workbook, load_workbook
 import os
 from dotenv import load_dotenv
+import asyncio
 
 # 📁 Папка для хранения Excel-файлов пользователей
 USER_DATA_DIR = "user_excels"
@@ -77,7 +78,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text("Нажмите 'Добавить данные', чтобы внести запись.")
 
 # 🚀 Запуск бота
-if __name__ == "__main__":
+async def __main__():
     load_dotenv()
 
     TOKEN = os.environ.get("BOT_TOKEN")
@@ -95,8 +96,10 @@ if __name__ == "__main__":
     app.add_handler(MessageHandler(filters.Text(["📤 Экспортировать файл"]), export_file))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
     print(f"🌐 Старт бота: {RENDER_HOSTNAME}, порт {PORT}")
-    app.run_webhook(listen="0.0.0.0",
+    await app.run_webhook(listen="0.0.0.0",
         port=PORT,
         webhook_url=f"https://{RENDER_HOSTNAME}/webhook"
     )
 
+if __name__ == "__main__":
+    asyncio.run(main())
